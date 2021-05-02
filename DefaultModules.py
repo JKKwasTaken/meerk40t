@@ -510,7 +510,13 @@ class DxfLoader:
                     continue
                 DxfLoader.entity_to_svg(elements, dxf, e, scale, translate_y)
             return
-        else:
+        elif entity.dxftype() == 'POINT': 
+            #if entity.dxftype() == 'CIRCLE':
+            #element = Circle(center=entity.dxf.center, r=entity.dxf.radius)
+            print(entity.dxf.location)
+            element = SimpleLine(x1=entity.dxf.location[0], y1=entity.dxf.location[1],
+                                 x2=entity.dxf.location[0], y2=entity.dxf.location[1])
+        else:            
             return  # Might be something unsupported.
 
         from ezdxf.tools.rgb import DXF_DEFAULT_COLORS, int2rgb
